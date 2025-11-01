@@ -88,15 +88,3 @@ The `insert` method is designed for maximum flexibility and ease-of-use.
     - If you don't specify an `id`, MindsDB will automatically generate one by taking an MD5 hash of the content. 
     - Globally disable autofill using `_auto_fill=False`.
 
-
-
-
-Example: Explicit no auto-fill
-```python
-kb.insert(
-    file_pointer, 
-    file_name="filing.pdf", 
-    company = 'NVIDIA',
-    _auto_fill=False  # skip autofill for all other missing fields
-)
-```
