@@ -27,7 +27,7 @@ answer = kb.analyze("Quarterly revenue for NVIDIA over the past 5 years")
 results = kb.search("NVIDIA during H2 2024", report_type="Quarterly")
 ```
 
-The goal with this part of the SDK is simple: **ask a question and get the answer your need**—`fast`. As such; the default for `.search(<plain language query>)` method auto-magically determines hybrid metadata filtering and semantic search over unstructured data to return the most relevant results. If, instead of a list results you want a direct answer from either your search results or the entire knowledge base, use `.analyze(<plain language question>)`. That's it folks! No agents bs, no fuss—just answers.
+The goal with this part of the SDK is simple: **ask a question and get the answer your need**—`fast`. As such; the default for `.search(<plain language query>)` method auto-magically determines hybrid metadata filtering and semantic search over unstructured data to return the most relevant results. Likewise; If instead of a list results, what you want is a direct answer from either your search results or the entire knowledge base, use `.analyze(<plain language question>)`. That's it! No agents bs, no fuss—just answers.
 
 
 
