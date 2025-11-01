@@ -7,8 +7,8 @@ With the Knowledgebase SDK, the goal is to make it dead simple to build build an
 
 ## How to create a knowledge base from scratch
 
-Creating knowledge bases is as simple as a few lines of code too.
-For example, this is how to created the KB from PDFs containing SEC filings:
+Creating knowledge bases (KB)s is as simple as a few lines of code too.
+For example, this is how to create a KB from PDFs containing SEC filings:
 
 ```python
 from minds_sdk import Client
