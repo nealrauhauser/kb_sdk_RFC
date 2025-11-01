@@ -80,6 +80,8 @@ The `insert` method is designed for maximum flexibility and ease-of-use.
   - A file pointer (e.g., opened PDF, image, etc.)
   - A valid HTTP(S) URL (`HttpUrl` string)
   - Or a Pydantic object matching your schema.
+> **Tip:** For best auto-extraction accuracy, document your schema attributes in the Pydantic class using descriptive field docs.
+
 
 - **Named arguments** let you set any attribute directly (`key=<value>`) and skip auto-fill for that specific attribute (`<value>` can be `None`). 
 
@@ -88,7 +90,6 @@ The `insert` method is designed for maximum flexibility and ease-of-use.
 
 
 
-> **Tip:** For best auto-extraction accuracy, document your schema attributes in the Pydantic class using descriptive field docs.
 
 Example: Explicit no auto-fill
 ```python
@@ -99,4 +100,3 @@ kb.insert(
     _auto_fill=False  # skip autofill for all other missing fields
 )
 ```
-In summary, just call `insert` with your content and whatever schema fields you have. MindsDB handles the rest—validation, auto-filling, hashing, and smart LLM extraction—unless you tell it not to.
