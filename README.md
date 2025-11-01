@@ -7,7 +7,7 @@ With the Knowledgebase SDK, the goal is to make it dead simple to build build an
 
 ## How to create a knowledge base from scratch
 
-Creating knowledge bases (KB)s is as simple as a few lines of code too.
+Creating knowledge bases (KB)s is as simple as a few lines of code.
 For example, this is how to create a KB from PDFs containing SEC filings:
 
 ```python
@@ -17,7 +17,8 @@ import datetime
 from pydantic import BaseModel
 
 # The schema we want our knowledge base to have.
-# Note that some attributes are structured while others are not. During search, we will use both types (i.e., hybrid search).
+# Note that some attributes are structured while others are not. 
+# During search, we will use both types (i.e., hybrid search).
 class FilingSchema(BaseModel):
     report_type: str
     company: str
