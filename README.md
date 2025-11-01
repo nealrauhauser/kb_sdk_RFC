@@ -1,40 +1,14 @@
 # Knowledge Bases SDK (RFC)
 
-With the Knowledgebase SDK, the goal is to make it dead simple to build large-scale semantic search on top of MindsDB. With a straightforward SDK to: load data, search, and get answers from vast amounts of unstructured information in just a few lines of code.
+With the Knowledgebase SDK, the goal is to make it dead simple to build build and use MindsDB large-scale semantic search capabilities. With a straightforward SDK to: load data, search, and get answers from vast amounts of unstructured information in just a few lines of code.
 
 
 > **NOTE:** We'll dive into `expert-mode` soon—for those who prefer coding with their hoodie up, tinkering with every last detail- But first, let's enjoy the simplicity of the default `hassle-zero` mode.
 
-
-
-```python
-from minds_sdk import Client
-
-# Example for seamntic search over SEC Filings 
-# Load a pre-existing knowledge base 'sec_filings'
-kb = Client(base_url=.., api_key=..).kb('sec_filings')
-
-# Search
-results = kb.search("Quarterly reports for NVIDIA during H2 2024")
-
-# Analyze results
-answer = results.analyze("What changed in revenue?")
-
-# Unbound analysis over the entire KB
-answer = kb.analyze("Quarterly revenue for NVIDIA over the past 5 years")
-
-# Search with literal metadata filters
-results = kb.search("NVIDIA during H2 2024", report_type="Quarterly")
-```
-
-The goal with this part of the SDK is simple: **ask a question and get the answer your need**—`fast`. As such; the default for `.search(<plain language query>)` method auto-magically determines hybrid metadata filtering and semantic search over unstructured data to return the most relevant results. Likewise; If instead of a list results, what you want is a direct answer from either your search results or the entire knowledge base, use `.analyze(<plain language question>)`. That's it! No agents bs, no fuss—just answers.
-
-
-
 ## How to create a knowledge base from scratch
 
 Creating knowledge bases is as simple as a few lines of code too.
-For example, this is how to created the KB from PDFs containing SEC filings that we searched previously:
+For example, this is how to created the KB from PDFs containing SEC filings:
 
 ```python
 from minds_sdk import Client
@@ -42,6 +16,8 @@ from pathlib import Path
 import datetime
 from pydantic import BaseModel
 
+# The schema we want our knowledge base to have.
+# Note that some attributes are structured while others are not. During search, we will use both types (i.e., hybrid search).
 class FilingSchema(BaseModel):
     report_type: str
     company: str
@@ -63,6 +39,37 @@ When inserting into a Knowledge Base, unless you say otherwise, MindsDB Server w
 - Indexes your text attributes for lightning-fast semantic search
 
 > Every `insert` request is managed asynchronously, making it very fast to send large amounts of data into a Knowledge Base.
+
+## Semantic Search over a Knowledge Base
+```python
+from minds_sdk import Client
+
+# Example for seamntic search over SEC Filings 
+# Load a pre-existing knowledge base 'sec_filings'
+kb = Client(base_url=.., api_key=..).kb('sec_filings')
+
+# Semantic Search 
+results = kb.search("Quarterly reports for NVIDIA during H2 2024")
+
+# Analyze results
+answer = results.analyze("What changed in revenue?")
+
+# Unbound analysis over the entire KB 
+answer = kb.analyze("Quarterly revenue for NVIDIA over the past 5 years")
+
+# Semantic Search with literal metadata filters 
+results = kb.search("NVIDIA during H2 2024", report_type="Quarterly")
+```
+
+The goal with this part of the SDK is simple: **ask a question and get the answer your need**—`fast`. As such; the default for `.search(<plain language query>)` method auto-magically determines hybrid metadata filtering and semantic search over unstructured data to return the most relevant results. Likewise; If instead of a list results, what you want is a direct answer from either your search results or the entire knowledge base, use `.analyze(<plain language question>)`. That's it! No agents bs, no fuss—just answers.
+
+
+
+## `expert-mode` 
+
+As promised, let's dive into `expert-mode`.
+
+#### .insert(<content>, <optional: attrs>)
 
 
 The `insert` method is designed for maximum flexibility and ease-of-use.
