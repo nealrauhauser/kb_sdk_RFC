@@ -27,7 +27,7 @@ class FilingSchema(BaseModel):
     summary: str
 
 # Simply insert anything you want into the KB
-kb = Client(<api_key>).kb.create('sec_filings', FilingSchema)
+kb = Client(base_url=.., api_key=..).kb.create('sec_filings', FilingSchema)
 for pdf_file in Path("quarterly_filings_folder").glob("*.pdf"):
     kb.insert(pdf_file, report_type='quarterly')  
 ```
